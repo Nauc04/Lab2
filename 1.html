@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Двозначне число текстом</title>
+</head>
+<body>
+<h1>Число у словесному вигляді</h1>
+
+<label>Введіть двозначне число (10–99): <input type="number" id="number" min="10" max="99"></label>
+<button onclick="numberToWords()">Перетворити</button>
+
+<p id="result"></p>
+
+<script>
+    function numberToWords() {
+        const num = parseInt(document.getElementById("number").value, 10);
+        const result = document.getElementById("result");
+
+        if (isNaN(num) || num < 10 || num > 99) {
+            result.textContent = "Будь ласка, введіть число від 10 до 99.";
+            return;
+        }
+
+        const teens = [
+            "десять", "одинадцять", "дванадцять", "тринадцять", "чотирнадцять",
+            "п’ятнадцять", "шістнадцять", "сімнадцять", "вісімнадцять", "дев’ятнадцять"
+        ];
+
+        const tens = [
+            "", "", "двадцять", "тридцять", "сорок", "п’ятдесят",
+            "шістдесят", "сімдесят", "вісімдесят", "дев’яносто"
+        ];
+
+        const units = [
+            "", "один", "два", "три", "чотири", "п’ять",
+            "шість", "сім", "вісім", "дев’ять"
+        ];
+
+        let text = "";
+
+        if (num >= 10 && num < 20) {
+            text = teens[num - 10];
+        } else {
+            const ten = Math.floor(num / 10);
+            const unit = num % 10;
+            text = tens[ten] + (unit > 0 ? " " + units[unit] : "");
+        }
+
+        result.textContent = text;
+    }
+</script>
+</body>
+</html>
