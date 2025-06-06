@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Замінити дати</title>
+</head>
+<body>
+<h1>Заміна формату дат у тексті</h1>
+
+<textarea id="textInput" rows="10" cols="60" placeholder="Вставте текст з датами у форматі рррр/мм/дд..."></textarea><br><br>
+<button onclick="replaceDates()">Замінити дати</button>
+
+<h3>Результат:</h3>
+<pre id="output"></pre>
+
+<script>
+  function replaceDates() {
+    const text = document.getElementById("textInput").value;
+
+    // Регулярний вираз для пошуку дати у форматі рррр/мм/дд
+    const pattern = /\b(\d{4})\/(\d{2})\/(\d{2})\b/g;
+
+    // Заміна формату дати на дд.мм.рррр
+    const replacedText = text.replace(pattern, '$3.$2.$1');
+
+    document.getElementById("output").textContent = replacedText;
+  }
+</script>
+</body>
+</html>

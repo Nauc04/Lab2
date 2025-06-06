@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS to camelCase</title>
+</head>
+<body>
+<h1>Перетворення CSS-назви в camelCase</h1>
+
+<label>Введіть CSS-властивість (через дефіс): <input type="text" id="cssInput"></label>
+<button onclick="convertToCamelCase()">Перетворити</button>
+
+<p id="result"></p>
+
+<script>
+  function toCamelCase(cssProp) {
+    return cssProp
+            .split('-')
+            .map((word, index) => index === 0
+                    ? word
+                    : word.charAt(0).toUpperCase() + word.slice(1)
+            )
+            .join('');
+  }
+
+  function convertToCamelCase() {
+    const input = document.getElementById('cssInput').value.trim();
+    const result = document.getElementById('result');
+
+    if (!input.includes('-')) {
+      result.textContent = "Введіть CSS-властивість з дефісом (наприклад: text-align)";
+      return;
+    }
+
+    const camelCased = toCamelCase(input);
+    result.textContent = `CamelCase: ${camelCased}`;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>camelCase to CSS</title>
+</head>
+<body>
+<h1>Перетворення camelCase у CSS-властивість</h1>
+
+<label>Введіть camelCase-властивість: <input type="text" id="camelInput"></label>
+<button onclick="convertToKebabCase()">Перетворити</button>
+
+<p id="result"></p>
+
+<script>
+  function toKebabCase(camelProp) {
+    return camelProp
+            .replace(/([A-Z])/g, '-$1') // додаємо дефіс перед великою літерою
+            .toLowerCase();
+  }
+
+  function convertToKebabCase() {
+    const input = document.getElementById('camelInput').value.trim();
+    const result = document.getElementById('result');
+
+    if (!input || input.includes('-')) {
+      result.textContent = "Введіть camelCase-рядок без дефісів.";
+      return;
+    }
+
+    const kebab = toKebabCase(input);
+    result.textContent = `CSS-стиль: ${kebab}`;
+  }
+</script>
+</body>
+</html>

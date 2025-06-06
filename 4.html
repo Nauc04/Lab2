@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Калькулятор з рядка</title>
+</head>
+<body>
+<h1>Калькулятор (рядковий приклад)</h1>
+
+<label>Введіть приклад (наприклад: 12 + 3): <input type="text" id="expression"></label>
+<button onclick="calculate()">Обчислити</button>
+
+<p id="result"></p>
+
+<script>
+  function stringCalculator(expr) {
+    const match = expr.match(/^(\s*-?\d+(\.\d+)?\s*)([+\-*/])(\s*-?\d+(\.\d+)?\s*)$/);
+    if (!match) return "Неправильний формат виразу.";
+
+    const a = parseFloat(match[1]);
+    const op = match[3];
+    const b = parseFloat(match[4]);
+
+    switch (op) {
+      case '+': return a + b;
+      case '-': return a - b;
+      case '*': return a * b;
+      case '/': return b !== 0 ? a / b : "Ділення на нуль!";
+      default: return "Невідома операція.";
+    }
+  }
+
+  function calculate() {
+    const expr = document.getElementById('expression').value.trim();
+    const output = stringCalculator(expr);
+    document.getElementById('result').textContent = `Результат: ${output}`;
+  }
+</script>
+</body>
+</html>
